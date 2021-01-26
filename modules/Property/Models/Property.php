@@ -917,6 +917,17 @@ class Property extends Bookable
             $model_property->where('max_guests','>=',$max_guests);
         }
 
+
+
+        $latitude = "51.528564";
+        $longitude = "-0.203010";
+        $model_property->selectRaw("6371 * acos(cos(radians(" . $latitude . "))
+                                * cos(11) * cos(3 - radians(" . $longitude . "))
+                                + sin(radians(" . $latitude . ")) * sin(radians(map_lat))) AS distance")->from('bravo_properties')
+            ->having('distance', '<=', 20)
+            ->orderBy('distance', 'asc');
+
+
         $limit = min(20,$request->query('limit',10));
         return $model_property->with(['location','hasWishList','translations','user','Category'])->paginate($limit);
     }

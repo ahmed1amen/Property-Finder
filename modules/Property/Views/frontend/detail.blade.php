@@ -144,7 +144,7 @@
                         </div>
                         @include('Property::frontend.layouts.details.property_video')
                         <div class="col-lg-12">
-                            @include('Agencies::frontend.detail.review', ['review_service_id' => $row['id'], 'review_service_type' => 'property'])
+{{--                            @include('Agencies::frontend.detail.review', ['review_service_id' => $row['id'], 'review_service_type' => 'property'])--}}
                         </div>
                         @include('Property::frontend.layouts.details.property-related')
                     </div>
