@@ -72,8 +72,8 @@
                                                             @endforeach
                                                         @endif
                                                           <div class="row p-md-1 pt0-xsd">
-                                                              <div class="col-lg-11 col-xl-10">
-                                                                  <ul class="apeartment_area_list mb0">
+                                                              <div class="col-lg-12 col-xl-12">
+                                                                  <ul class="apeartment_area_list  text-center">
                                                                     @php $property_search_fields = setting_item_array('property_search_fields');
                                                                         $property_search_fields = array_values(\Illuminate\Support\Arr::sort($property_search_fields, function ($value) {
                                                                             return $value['position'] ?? 0;
@@ -103,7 +103,14 @@
                                                                     @include('Property::frontend.layouts.search.fields.option',['list' => $list_number,'holder' => __('Bedrooms'), 'name' => 'bedroom'])
                                                                     @include('Property::frontend.layouts.search.fields.option',['list' => $list_number,'holder' => __('Garages'), 'name' => 'garage'])
                                                                     @include('Property::frontend.layouts.search.fields.option',['list' => $list_year,'holder' => __('Year built'), 'name' => 'year_built'])
-                                                                          
+                                                                      <li class="mb-3">
+                                                                          <label for="distance">Nearest Distance (km)</label>
+                                                                          <input type="number" class="form-control text-center" id="distance" name="distance" placeholder="Enter Distance ..." value="50">
+                                                                      </li>
+                                                                      <input type="hidden" name="map_lat">
+                                                                      <input type="hidden" name="map_lng">
+                                                                      <div class="h200" id="map-canvas"></div>
+
                                                                   </ul>
                                                               </div>
                                                               <div class="col-lg-1 col-xl-2">
@@ -133,3 +140,38 @@
         </div>
     </div>
 </section>
+
+@section('footer')
+    {!! App\Helpers\MapEngine::scripts() !!}
+    <script>
+        jQuery(function ($) {
+            new BravoMapEngine('map-canvas', {
+                fitBounds: true,
+                center: [{{ "51.505"}}, {{  "-0.09"}}],
+                zoom:{{ "8"}},
+                ready: function (engineMap) {
+
+                    engineMap.on('click', function (dataLatLng) {
+                        engineMap.clearMarkers();
+                        engineMap.addMarker(dataLatLng, {
+                            icon_options: {}
+                        });
+                        $("input[name=map_lat]").attr("value", dataLatLng[0]);
+                        $("input[name=map_lng]").attr("value", dataLatLng[1]);
+                    });
+                    engineMap.on('zoom_changed', function (zoom) {
+                        $("input[name=map_zoom]").attr("value", zoom);
+                    });
+                    engineMap.searchBox($('.bravo_searchbox'),function (dataLatLng) {
+                        engineMap.clearMarkers();
+                        engineMap.addMarker(dataLatLng, {
+                            icon_options: {}
+                        });
+                        $("input[name=map_lat]").attr("value", dataLatLng[0]);
+                        $("input[name=map_lng]").attr("value", dataLatLng[1]);
+                    });
+                }
+            });
+        })
+    </script>
+@endsection

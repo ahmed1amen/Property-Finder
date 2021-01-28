@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\DB;
 use \Illuminate\Support\Facades\Route;
 
+
 Route::group(['prefix' => config('property.property_route_prefix')], function () {
 
 
