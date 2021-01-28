@@ -102,8 +102,15 @@
     {!! setting_item_with_lang_raw('head_scripts') !!}
 
     @php event(new \Modules\Layout\Events\LayoutEndHead()); @endphp
+    <style>
+    body {
+        direction: ltr !important;
+    }
+    </style>
+
 </head>
-<body class="frontend-page {{$body_class ?? ''}} @if(setting_item_with_lang('enable_rtl')) is-rtl @endif">
+{{--@if(setting_item_with_lang('enable_rtl')) is-rtl @endif--}}
+<body class="frontend-page {{$body_class ?? ''}}">
     @php event(new \Modules\Layout\Events\LayoutBeginBody()); @endphp
 
     {!! setting_item('body_scripts') !!}
