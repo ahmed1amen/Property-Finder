@@ -37,6 +37,7 @@ class PropertyController extends Controller
 
     public function index(Request $request)
     {
+
         $is_ajax = $request->query('_ajax');
         $list = call_user_func([$this->propertyClass,'search'],$request);
         $markers = [];
@@ -53,6 +54,7 @@ class PropertyController extends Controller
                 ];
             }
         }
+
         $limit_location = 15;
         if( empty(setting_item("property_location_search_style")) or setting_item("property_location_search_style") == "normal" ){
             $limit_location = 1000;
@@ -103,7 +105,7 @@ class PropertyController extends Controller
         if (!empty($location_id)) {
             $property_related = $this->propertyClass::where('location_id', $location_id)->where("status", "publish")->take(4)->whereNotIn('id', [$row->id])->with(['location','translations','hasWishList'])->get();
         }
-        $review_list = Review::where('object_id', $row->id)->where('object_model', 'property')->where("status", "approved")->orderBy("id", "desc")->with('author')->paginate(setting_item('property_review_number_per_page', 5));
+//        $review_list = Review::where('object_id', $row->id)->where('object_model', 'property')->where("status", "approved")->orderBy("id", "desc")->with('author')->paginate(setting_item('property_review_number_per_page', 5));
         $row->view = $row->view + 1;
         $row->save();
 
@@ -115,7 +117,7 @@ class PropertyController extends Controller
             'list_location'     => $this->locationClass::where('status', 'publish')->limit($limit_location)->with(['translations'])->get()->toTree(),
             'list_category'     => $this->propertyCategoryClass::where('status', 'publish')->get()->toTree(),
             'property_min_max_price' => $this->propertyClass::getMinMaxPrice(),
-            'review_list'       => $review_list,
+//            'review_list'       => $review_list,
             'seo_meta'          => $row->getSeoMetaWithTranslation(app()->getLocale(),$translation),
             'body_class'        =>'is_single'
         ];

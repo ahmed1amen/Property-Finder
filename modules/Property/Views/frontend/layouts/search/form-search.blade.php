@@ -26,45 +26,53 @@
                 for($year = $current_year;$year >= ($current_year - 8);$year--) {
                     $list_year[] = (object)['id' => $year,'name' => $year];
                 }
-                
+
                 @endphp
                 @if(!empty($property_search_fields))
                     @foreach($property_search_fields as $field)
                         @switch($field['field'])
                             @case ('service_name')
-                                @include('Property::frontend.layouts.search.fields.service_name', ['holder' => $field['title'], 'name' => 'service_name'])
+                            @include('Property::frontend.layouts.search.fields.service_name', ['holder' => $field['title'], 'name' => 'service_name'])
                             @break
                             @case ('location')
-                                @include('Property::frontend.layouts.search.fields.option',['list' => $list_location, 'holder' => $field['title'], 'name' => 'location_id'])
+                            @include('Property::frontend.layouts.search.fields.option',['list' => $list_location, 'holder' => $field['title'], 'name' => 'location_id'])
                             @break
                             @case ('category')
-                                @include('Property::frontend.layouts.search.fields.option',['list' => $list_category,'holder' => $field['title'], 'name' => 'category_id'])
+                            @include('Property::frontend.layouts.search.fields.option',['list' => $list_category,'holder' => $field['title'], 'name' => 'category_id'])
                             @break
                             @case ('property_type')
-                                @include('Property::frontend.layouts.search.fields.option',['list' => [(object)['id' => 1,'name' => 'For Buy'],(object)['id' => 2,'name' => 'For Rent']],'holder' => $field['title'], 'name' => 'property_type'])
+                            @include('Property::frontend.layouts.search.fields.option',['list' => [(object)['id' => 1,'name' => 'For Buy'],(object)['id' => 2,'name' => 'For Rent']],'holder' => $field['title'], 'name' => 'property_type'])
                             @break
                             @case ('bathrooms')
-                                @include('Property::frontend.layouts.search.fields.option',['list' => $list_number,'holder' => $field['title'], 'name' => 'bathroom'])
+                            @include('Property::frontend.layouts.search.fields.option',['list' => $list_number,'holder' => $field['title'], 'name' => 'bathroom'])
                             @break
                             @case ('bedrooms')
-                                @include('Property::frontend.layouts.search.fields.option',['list' => $list_number,'holder' => $field['title'], 'name' => 'bedroom'])
+                            @include('Property::frontend.layouts.search.fields.option',['list' => $list_number,'holder' => $field['title'], 'name' => 'bedroom'])
                             @break
                             @case ('garages')
-                                @include('Property::frontend.layouts.search.fields.option',['list' => $list_number,'holder' => $field['title'], 'name' => 'garage'])
+                            @include('Property::frontend.layouts.search.fields.option',['list' => $list_number,'holder' => $field['title'], 'name' => 'garage'])
                             @break
                             @case ('year_built')
-                                @include('Property::frontend.layouts.search.fields.option',['list' => $list_year,'holder' => $field['title'], 'name' => 'year_built'])
+                            @include('Property::frontend.layouts.search.fields.option',['list' => $list_year,'holder' => $field['title'], 'name' => 'year_built'])
                             @break
                             @case ('price')
-                                @include('Property::frontend.layouts.search.fields.price',['list' => $list_year,'holder' => $field['title'], 'name' => 'price'])
+                            @include('Property::frontend.layouts.search.fields.price',['list' => $list_year,'holder' => $field['title'], 'name' => 'price'])
                             @break
                             @case (null)
                             @break
                             @default
-                                @include('Property::frontend.layouts.search.fields.attribute',['key' => $field['field'],'holder' => $field['title']])
+                            @include('Property::frontend.layouts.search.fields.attribute',['key' => $field['field'],'holder' => $field['title']])
                             @break
                         @endswitch
                     @endforeach
+
+
+                        <input value="{{Request::input('distance')??'' }}"   name="distance"  type="hidden"   class="form-control text-center"  placeholder="Enter Distance ..." value="50">
+                        <input value="{{Request::input('map_lat')??'' }}"   name="map_lat"  type="hidden">
+                        <input value="{{Request::input('map_lng')??'' }}"   name="map_lng"  type="hidden">
+
+
+
                 @endif
                 <li>
                     <div class="search_option_button">
