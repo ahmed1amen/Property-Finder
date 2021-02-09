@@ -104,7 +104,7 @@
                                                                     @include('Property::frontend.layouts.search.fields.option',['list' => $list_number,'holder' => __('Garages'), 'name' => 'garage'])
                                                                     @include('Property::frontend.layouts.search.fields.option',['list' => $list_year,'holder' => __('Year built'), 'name' => 'year_built'])
                                                                       <li class="mb-3">
-                                                                          <label for="distance">Nearest Distance (km)</label>
+                                                                          <label for="distance">{{__('nearest_distance')}}</label>
                                                                           <input type="number" class="form-control text-center" id="distance" name="distance" placeholder="Enter Distance ..." value="50">
                                                                       </li>
                                                                       <input type="hidden" name="map_lat">

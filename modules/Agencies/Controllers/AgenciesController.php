@@ -32,7 +32,7 @@ class AgenciesController extends Controller
     public function index()
     {
         $agencies_count = $this->agenciesClass::where("status", "publish")->count();
-        $agencies       = $this->agenciesClass->getListAgencies();
+        $agencies = $this->agenciesClass->getListAgencies();
         $data = [
             'agencies_count' => $agencies_count,
             'title' => __('Our Agencies'),
@@ -64,10 +64,16 @@ class AgenciesController extends Controller
             'review_list' => $review_list,
             'listings' => $listProperty,
             'countListing' => $listProperty->count(),
-            'translation'=>$translation,
-            'page_title'=>$translation->name ?? ''
+            'translation' => $translation,
+            'page_title' => $translation->name ?? ''
         ];
         $this->setActiveMenu($row);
         return view('Agencies::frontend.detail', $data);
+    }
+
+    public function registrationForm()
+    {
+        return view('Agencies::frontend.register');
+
     }
 }
