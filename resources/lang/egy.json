@@ -1921,5 +1921,24 @@
     "installer_messages.environment.errors": "installer_messages.environment.errors",
     "installer_messages.installed.success_log_message": "installer_messages.installed.success_log_message",
     "installer_messages.updater.log.success_message": "installer_messages.updater.log.success_message",
-    "installer_messages.welcome.title": "installer_messages.welcome.title"
+    "installer_messages.welcome.title": "installer_messages.welcome.title",
+
+
+
+"moving_and_installing_furniture": "نقل و تركيب األثاث",
+"maintenance_services": "خدمات الصيانة",
+"contract_documentation": "توثيق العقود",
+"mortgage": "التمويل العقاري",
+"engineering_and_contracting_services": "الخدمات الهندسية و المقاوالت",
+"real_estate_appraisal": "التقييم العقاري",
+"real_estate_development": "التطوير العقاري",
+"real_estate_auctions_and_tenders": "المزادات و المناقصات العقارية",
+"customizing_kitchens": "تفصيل المطابخ",
+    "agent_services": "الخدمات"
+
+
+
+
+
+
 }

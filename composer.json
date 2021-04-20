@@ -34,6 +34,7 @@
         "simplesoftwareio/simple-qrcode": "^2.0",
         "spatie/laravel-image-optimizer": "^1.4",
         "spatie/laravel-permission": "^3.16",
+        "spatie/laravel-translatable": "^4.6",
         "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {

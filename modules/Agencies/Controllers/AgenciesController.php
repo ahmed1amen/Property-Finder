@@ -4,9 +4,13 @@ namespace Modules\Agencies\Controllers;
 
 use App\Http\Controllers\Controller;
 use DB;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 use Modules\Agencies\Models\Agencies;
 use Modules\Agencies\Models\AgenciesAgent;
+use Modules\Agencies\Models\AgentService;
 use Modules\Contact\Models\Contact;
 use Modules\Property\Models\Property;
 use Modules\Review\Models\Review;
@@ -76,4 +80,28 @@ class AgenciesController extends Controller
         return view('Agencies::frontend.register');
 
     }
+
+
+    public function listServices()
+    {
+        Schema::create('agent_services', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('slug');
+            $table->boolean('status')->default(true);
+            $table->timestamps();
+        });
+
+        $agencies_count = $this->agenciesClass::where("status", "publish")->count();
+        $agencies = $this->agenciesClass->getListAgencies();
+        $data = [
+            'agencies_count' => $agencies_count,
+            'title' => __('Our Agencies'),
+            'agencies' => $agencies,
+        ];
+
+
+        return view('Agencies::frontend.services.list' ,$data);
+
+    }
+
 }

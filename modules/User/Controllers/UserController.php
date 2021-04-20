@@ -43,6 +43,7 @@ class UserController extends FrontendController
 
     public function dashboard(Request $request)
     {
+
         $this->checkPermission('dashboard_agent_access');
         $user_id = Auth::id();
         $countProperty = Property::where("create_user", $user_id)->count();
@@ -411,15 +412,15 @@ class UserController extends FrontendController
         // ->select('bc.*', 'bp.title as property_title', 'bac.name as agency_title')
         // ->where('vendor_id', Auth::id());
         // if ($request->input('contact_type') == 'property_contact') {
-        
+
         //     $rows -> where('bc.object_model','=','property');
         // }
         // if ($request->input('contact_type') == 'agent_contact') {
-        
+
         //     $rows -> where('bc.object_model','=','agent');
         // }
         // if ($request->input('contact_type') == 'agency_contact') {
-        
+
         //     $rows -> where('bc.object_model','=','agencies');
         // }
         // $rows = $rows->leftJoin('bravo_properties as bp', function($join)

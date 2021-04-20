@@ -7,7 +7,7 @@
             @if($row->image_url)
                 <img class="img-whp" src="{{$row->image_url}}" alt="property image">
             @else
-                <span class="avatar-text-large">{{$row->vendor->display_name[0]}}</span>
+                <span class="avatar-text-large">{{$row->vendor->display_name[0] ?? ''}}</span>
             @endif
             <div class="thmb_cntnt">
                 <ul class="tag mb0">
