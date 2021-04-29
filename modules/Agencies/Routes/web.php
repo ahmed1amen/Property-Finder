@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 //  23, 21, 20, 19 , 3 Customer
 // 9 ,10 , 11 , 12 ,13 ,22 Agent
- auth()->loginUsingId(9);
+// auth()->loginUsingId(9);
 
 
 Route::group(['prefix'=> 'agency'],function(){
@@ -24,7 +24,7 @@ Route::group(['prefix'=> 'agency'],function(){
 
 Route::group(['prefix'=> 'agent'],function() {
     Route::get('/register','\Modules\Agencies\Controllers\AgenciesController@registrationForm')->name('agent.register');
-    Route::post('/register','\Modules\Agencies\Controllers\AgenciesController@registrationForm')->name('agent.register.store');
+    Route::post('/register','\Modules\Agencies\Controllers\AgenciesController@register')->name('agent.register.store');
 
     Route::get('/','\Modules\Agencies\Controllers\AgentController@index')->name('agent.search');
     // Route::match(['get'],'/agentContact','\Modules\Agencies\Controllers\AgentController@getAgentContact')->name('agent.getAgentContact');
