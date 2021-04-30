@@ -15,9 +15,9 @@ $menus = [
         'position' => 21
     ],
     "services"=>[
-        'url'   => route("user.wishList.index"),
-        'title' => __("Wishlist"),
-        'icon'  => 'fa fa-heart-o',
+        'url'   => route("user.service.index"),
+        'title' => __("Services"),
+        'icon'  => 'fa fa-line-chart',
         'position' => 21
     ],
     'profile'         => [

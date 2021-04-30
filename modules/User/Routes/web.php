@@ -5,6 +5,10 @@ use \Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true]);
 Route::group(['prefix'=>'user','middleware' => ['auth','verified']],function(){
     Route::match(['get'],'/dashboard','UserController@dashboard')->name("vendor.dashboard");
+
+    Route::get('/service','ServiceController@index')->name("user.service.index");
+
+
     Route::post('/reloadChart','UserController@reloadChart');
 
     Route::get('/showContact', 'UserController@showContact')->name('user.showContact');

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 //  23, 21, 20, 19 , 3 Customer
 // 9 ,10 , 11 , 12 ,13 ,22 Agent
-// auth()->loginUsingId(9);
+  auth()->loginUsingId(9);
 
 
 Route::group(['prefix'=> 'agency'],function(){
