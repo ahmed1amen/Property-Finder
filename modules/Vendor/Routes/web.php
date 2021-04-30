@@ -11,7 +11,7 @@
 */
 use Illuminate\Support\Facades\Route;
 Route::group(['prefix'=>'agent'],function(){
-    Route::post('/register','AgentController@register')->name('vendor.register');
+//    Route::post('/register','AgentController@register')->name('vendor.register');
 
 });
 

@@ -169,5 +169,6 @@
     @endif
     <div class="error message-error invalid-feedback"></div>
     <button type="submit" class="btn btn-log btn-block btn-thm">{{ __('Sign Up') }}</button>
+    <a   href="{{route('agent.register')}}" class="btn btn-log btn-block btn-thm">{{ __('Sign Up As Agency') }}</a>
     <p class="text-center">{{ __('Already have an account? ') }}<a class="text-thm" href="javascript:void(0)" data-target="#login" data-toggle="modal">{{ __('Log In') }}</a></p>
 </form>

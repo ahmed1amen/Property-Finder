@@ -40,6 +40,7 @@
     "User blocked": "المستخدم المحظور",
     "Your account has been blocked": "تم حظر حسابك",
     "Sign Up": "سجل",
+    "Sign Up As Agency": "سجل كـ وكالة",
     "Not Rated": "غير مصنف",
     "Publish": "ينشر",
     "Blocked": "ممنوع",
@@ -1073,7 +1074,7 @@
     ":count Guest in maximum": ": عد الضيف كحد أقصى",
     ":count Guests in maximum": ": عد الضيوف كحد أقصى",
     "BOOK NOW": "احجز الآن",
-    "Similar Properties": "خصائص مماثلة",
+    "Similar Properties": "عقارات مماثلة",
     "1 Adult": "1 بالغ",
     ":count Adults": ": عد الكبار",
     ":count Child": ": عد طفل",
@@ -1911,6 +1912,7 @@
     "Go to page :page": "انتقل إلى الصفحة: الصفحة",
     "auth.failed": "فشلت المصادقه",
     "auth.throttle": "المصادقة",
+    "nearest_distance": "أقرب مسافة (كم)",
     "There was an error on row :row. :message": "حدث خطأ في الصف: الصف. :رسالة",
     "installer_messages.environment.wizard.form.name_required": "installer_messages.environment.wizard.form.name_required",
     "installer_messages.environment.wizard.form.db_connection_failed": "installer_messages.environment.wizard.form.db_connection_failed",
@@ -1919,5 +1921,24 @@
     "installer_messages.environment.errors": "installer_messages.environment.errors",
     "installer_messages.installed.success_log_message": "installer_messages.installed.success_log_message",
     "installer_messages.updater.log.success_message": "installer_messages.updater.log.success_message",
-    "installer_messages.welcome.title": "installer_messages.welcome.title"
+    "installer_messages.welcome.title": "installer_messages.welcome.title",
+
+
+
+"moving_and_installing_furniture": "نقل و تركيب األثاث",
+"maintenance_services": "خدمات الصيانة",
+"contract_documentation": "توثيق العقود",
+"mortgage": "التمويل العقاري",
+"engineering_and_contracting_services": "الخدمات الهندسية و المقاوالت",
+"real_estate_appraisal": "التقييم العقاري",
+"real_estate_development": "التطوير العقاري",
+"real_estate_auctions_and_tenders": "المزادات و المناقصات العقارية",
+"customizing_kitchens": "تفصيل المطابخ",
+    "agent_services": "الخدمات"
+
+
+
+
+
+
 }

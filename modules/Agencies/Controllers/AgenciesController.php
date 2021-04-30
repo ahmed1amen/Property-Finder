@@ -2,14 +2,27 @@
 
 namespace Modules\Agencies\Controllers;
 
+use App\Helpers\ReCaptchaEngine;
 use App\Http\Controllers\Controller;
 use DB;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
+use Matrix\Exception;
 use Modules\Agencies\Models\Agencies;
 use Modules\Agencies\Models\AgenciesAgent;
+use Modules\Agencies\Models\AgentService;
 use Modules\Contact\Models\Contact;
 use Modules\Property\Models\Property;
 use Modules\Review\Models\Review;
+use Modules\User\Events\SendMailUserRegistered;
 
 class AgenciesController extends Controller
 {
@@ -32,7 +45,7 @@ class AgenciesController extends Controller
     public function index()
     {
         $agencies_count = $this->agenciesClass::where("status", "publish")->count();
-        $agencies       = $this->agenciesClass->getListAgencies();
+        $agencies = $this->agenciesClass->getListAgencies();
         $data = [
             'agencies_count' => $agencies_count,
             'title' => __('Our Agencies'),
@@ -64,10 +77,97 @@ class AgenciesController extends Controller
             'review_list' => $review_list,
             'listings' => $listProperty,
             'countListing' => $listProperty->count(),
-            'translation'=>$translation,
-            'page_title'=>$translation->name ?? ''
+            'translation' => $translation,
+            'page_title' => $translation->name ?? ''
         ];
         $this->setActiveMenu($row);
         return view('Agencies::frontend.detail', $data);
     }
+
+    public function registrationForm()
+    {
+        return view('Agencies::frontend.register');
+
+    }
+
+    public function register(Request $request)
+    {
+        $rules =
+            [
+                'first_name' => ['required', 'string', 'max:255'],
+                'last_name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string'],
+                'phone' => ['required','numeric', 'string'],
+                'term' => ['required'],
+            ];
+        $messages = [
+            'email.required' => __('Email is required field'),
+            'email.email' => __('Email invalidate'),
+            'password.required' => __('Password is required field'),
+            'first_name.required' => __('The first name is required field'),
+            'last_name.required' => __('The last name is required field'),
+            'term.required' => __('The terms and conditions field is required'),
+        ];
+        if (ReCaptchaEngine::isEnable() and setting_item("user_enable_register_recaptcha")) {
+            $codeCapcha = $request->input('g-recaptcha-response');
+            if (!$codeCapcha or !ReCaptchaEngine::verify($codeCapcha)) {
+                $errors = new MessageBag(['message_error' => __('Please verify the captcha')]);
+                return response()->json([
+                    'error' => true,
+                    'messages' => $errors
+                ], 200);
+            }
+        }
+        $this->validate($request,$rules,$messages);
+
+            $user = \App\User::create([
+                'first_name' => strip_tags($request->input('first_name')),
+                'last_name' => strip_tags($request->input('last_name')),
+                'email' => strip_tags($request->input('email')),
+                'password' => Hash::make($request->input('password')),
+                'publish' => 'publish',
+                'phone' => strip_tags($request->input('phone')),
+            ]);
+            event(new Registered($user));
+            Auth::loginUsingId($user->id);
+            try {
+                event(new SendMailUserRegistered($user));
+            } catch (Exception $exception) {
+
+                Log::warning("SendMailUserRegistered: " . $exception->getMessage());
+            }
+             $user->assignRole('agent');
+            $url = $request->input('redirect') ? $request->input('redirect') : url('/');
+
+            return response()->redirectTo($url);
+
+    }
+
+
+    public function listServices()
+    {
+        Schema::create('agent_services', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('slug');
+            $table->boolean('status')->default(true);
+            $table->timestamps();
+        });
+
+        $agencies_count = $this->agenciesClass::where("status", "publish")->count();
+        $agencies = $this->agenciesClass->getListAgencies();
+        $data = [
+            'agencies_count' => $agencies_count,
+            'title' => __('Our Agencies'),
+            'agencies' => $agencies,
+        ];
+
+
+        return view('Agencies::frontend.services.list', $data);
+
+    }
+
 }
+
+
+

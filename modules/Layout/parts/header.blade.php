@@ -22,7 +22,7 @@
 							<?php $logo_tran = get_file_url($logo_id_tran,'full') ?>
 							<img class="logo1 img-fluid" src="{{$logo_tran}}" alt="{{setting_item("site_title")}}">
 						@endif
-					@else 
+					@else
 						@if($logo_id = setting_item("logo_id"))
 							<?php $logo = get_file_url($logo_id,'full') ?>
 							<img class="logo1 img-fluid" src="{{$logo}}" alt="{{setting_item("site_title")}}">
@@ -38,8 +38,10 @@
 		        <!--Note: declare the Menu style in the data-menu-style="horizontal" (options: horizontal, vertical, accordion) -->
                 <ul id="respMenu" class="ace-responsive-menu text-right" data-menu-style="horizontal">
 					<?php generate_menu('primary') ?>
-					@include('Core::frontend.currency-switcher')
-                    @include('Language::frontend.switcher')
+                        @include('Core::frontend.services-menu')
+                        @include('Core::frontend.currency-switcher')
+                        @include('Language::frontend.switcher')
+
 					@if(!Auth::id())
 						<li class="list-inline-item">
 							<a href="javascript:void(0)" class="btn flaticon-user"> <span class="dn-lg" data-toggle="modal" data-target="#login">{{ __('Login/') }}</span> <span data-toggle="modal" data-target="#register">{{ __('Register') }}</span> </a>
@@ -114,8 +116,12 @@
 					<li><a href="{{route('auth.login')}}" ><span class="flaticon-user"></span> {{__('Login')}}</a></li>
 					<li><a href="{{route('auth.register')}}"><span class="flaticon-edit"></span> {{__('Register')}}</a></li>
 				@endif
-					<li>@include('Core::frontend.currency-switcher',['mobile'=>true])</li>
-					<li>@include('Language::frontend.switcher',['mobile'=>true])</li>
+                    <li>@include('Core::frontend.services-menu',['mobile'=>true])</li>
+                    <li>@include('Core::frontend.currency-switcher',['mobile'=>true])</li>
+                    <li>@include('Language::frontend.switcher',['mobile'=>true])</li>
+
+
+
 			</ul>
 		</nav>
     </div>

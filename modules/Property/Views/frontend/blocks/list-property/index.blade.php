@@ -30,8 +30,10 @@
             </div>
             <div class="col-lg-12">
                 <div class="feature_property_slider">
+
                     @foreach($rows as $row)
-                        @include('Property::frontend.layouts.search.loop-gird')
+
+                        @include('Property::frontend.layouts.search.loop-gird' )
                     @endforeach
                 </div>
             </div>

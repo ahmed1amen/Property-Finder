@@ -66,7 +66,6 @@
                         @endswitch
                     @endforeach
 
-
                         <input value="{{Request::input('distance')??'' }}"   name="distance"  type="hidden"   class="form-control text-center"  placeholder="Enter Distance ..." value="50">
                         <input value="{{Request::input('map_lat')??'' }}"   name="map_lat"  type="hidden">
                         <input value="{{Request::input('map_lng')??'' }}"   name="map_lng"  type="hidden">

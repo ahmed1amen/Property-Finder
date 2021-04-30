@@ -16,7 +16,7 @@
         @if(!empty($file))
             <link rel="icon" type="{{$file['file_type']}}" href="{{asset('uploads/'.$file['file_path'])}}" />
         @else:
-            <link rel="icon" type="image/png" href="{{url('images/favicon.png')}}" />
+        <link rel="icon" type="image/png" href="{{url('images/favicon.png')}}" />
         @endif
     @endif
 
@@ -27,7 +27,7 @@
     <!-- Responsive stylesheet -->
     <link rel="stylesheet" href="{{asset('findhouse/css/responsive.css')}}">
     <link rel="stylesheet" href="{{asset('dist/frontend/css/frontend.css')}}">
-<!-- Title -->
+    <!-- Title -->
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     {!! \App\Helpers\Assets::css() !!}
@@ -41,7 +41,7 @@
             decimal_separator:'{{get_current_currency('currency_decimal')}}',
             currency_position:'{{get_current_currency('currency_format')}}',
             currency_symbol:'{{currency_symbol()}}',
-			currency_rate:'{{get_current_currency('rate',1)}}',
+            currency_rate:'{{get_current_currency('rate',1)}}',
             date_format:'{{get_moment_date_format()}}',
             map_provider:'{{setting_item('map_provider')}}',
             map_gmap_key:'{{setting_item('map_gmap_key')}}',
@@ -102,21 +102,22 @@
     {!! setting_item_with_lang_raw('head_scripts') !!}
 
     @php event(new \Modules\Layout\Events\LayoutEndHead()); @endphp
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 </head>
 <body class="frontend-page {{$body_class ?? ''}} @if(setting_item_with_lang('enable_rtl')) is-rtl @endif">
-    @php event(new \Modules\Layout\Events\LayoutBeginBody()); @endphp
+@php event(new \Modules\Layout\Events\LayoutBeginBody()); @endphp
 
-    {!! setting_item('body_scripts') !!}
-    {!! setting_item_with_lang_raw('body_scripts') !!}
-    <div class="wrapper">
-        {{-- @include('Layout::parts.topbar') --}}
-        @include('Layout::parts.header')
-        @yield('content')
-        @include('Layout::parts.footer')
-    </div>
-    {!! setting_item('footer_scripts') !!}
-    {!! setting_item_with_lang_raw('footer_scripts') !!}
-    @php event(new \Modules\Layout\Events\LayoutEndBody()); @endphp
-     <!-- Fotorama -->
+{!! setting_item('body_scripts') !!}
+{!! setting_item_with_lang_raw('body_scripts') !!}
+<div class="wrapper">
+    {{-- @include('Layout::parts.topbar') --}}
+    @include('Layout::parts.header')
+    @yield('content')
+    @include('Layout::parts.footer')
+</div>
+{!! setting_item('footer_scripts') !!}
+{!! setting_item_with_lang_raw('footer_scripts') !!}
+@php event(new \Modules\Layout\Events\LayoutEndBody()); @endphp
+<!-- Fotorama -->
 </body>
 </html>
